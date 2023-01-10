@@ -7,7 +7,8 @@ import { Material } from "../models/Material.Model.js";
 const getMaterial = async (req,res,next) => {
 
     try {
-        const material = await Material.find().populate(({path:'almacen', select :'name'}));
+        const material = await Material.find()
+        //.populate(({path:'almacen', select :'name'}));
         
         return res.status(200).json(material);
     } catch (error) {
