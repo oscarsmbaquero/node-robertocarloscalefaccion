@@ -13,10 +13,6 @@ import { DB_URL, connect } from "./server/config/db.js";
  import { avisosRoutes } from './server/api/routes/avisos.routes.js';
  import { materialRoutes } from './server/api/routes/material.routes.js';
 
-
-
-
-
 //creo servidor express
 const server = express();
 //conectamos a traves de la funcion de mongo
