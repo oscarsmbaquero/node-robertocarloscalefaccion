@@ -2,7 +2,7 @@ import { Avisos } from "../models/Avisos.Model.js";
 import { httpStatusCode } from "../../utils/httpStatusCode.js";
 import { Material } from "../models/Material.Model.js";
 import { User } from "../models/User.Model.js";
-import { Items } from "../models/Items.Model.js";
+
 
 const getAvisos = async (req, res, next) => {
   // console.log('Entro');
@@ -213,7 +213,6 @@ const ShowIntervencion = async (req, res, next) => {
     const avisoById = await Avisos.findById(id)
       .populate({ path: "tecnicoIntervencion", select: "name" })
       .populate({ path: "materialIntervencion", select: "descripcion" })
-      .populate({ path: "item",select:"codigo"});
 
     //.populate(({path:'materialIntervencion', select :'descripcion'}));
 
