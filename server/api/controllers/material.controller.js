@@ -9,7 +9,7 @@ const getMaterial = async (req,res,next) => {
     try {
         const material = await Material.find()
         //.populate(({path:'almacen', select :'name'}));
-        
+        console.log(material,'material');
         return res.status(200).json(material);
     } catch (error) {
         return next(error)        

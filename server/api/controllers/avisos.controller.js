@@ -27,17 +27,19 @@ const getAvisos = async (req, res, next) => {
 };
 
 const createAvisos = async (req, res, next) => {
+
+  console.log(req.body)
   try {
     const NewAviso = new Avisos({
-      n_incidencia: req.body.n_incidencia,
+      cliente: req.body.cliente,
+      direccion: req.body.direccion,
       localidad: req.body.localidad,
-      provincia: req.body.provincia,
-      centro: req.body.centro,
+      caldera: req.body.caldera,
+      telefono: req.body.telefono,
       averia: req.body.averia,
       prioridad: req.body.prioridad,
       estado: req.body.estado,
-      tecnico: req.body.tecnico,
-      image: req.body.image,
+      //image: req.body.image,
     });
 
     const newAvisoDB = await NewAviso.save();
