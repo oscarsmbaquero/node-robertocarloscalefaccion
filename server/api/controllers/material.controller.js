@@ -26,7 +26,7 @@ const getMaterial = async (req,res,next) => {
           almacen : req.body.almacen,
           incidencia : req.body.incidencia,
           ubicacion : req.body.ubicacion,
-          pcompra : req.body.ubicacion,
+          pcompra : req.body.pcompra,
           iva : req.body.iva,
           pvp : req.body.pvp,
           //image : req.body.image,
