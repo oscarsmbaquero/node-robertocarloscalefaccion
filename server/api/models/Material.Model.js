@@ -5,7 +5,7 @@ const materialSchema = new Schema(
     {
      descripcion: { type:String, required:true },
      estado: { type:String, required:false },
-     incidencia: { type:String, required:false },
+     ubicacion: { type:String, required:false },
      pcompra:{type:Number, required:true},
      iva:{type:Number, required:true},
      pvp:{type:Number, required:true},
