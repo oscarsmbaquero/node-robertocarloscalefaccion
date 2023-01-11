@@ -25,10 +25,13 @@ const getMaterial = async (req,res,next) => {
           tipo : req.body.tipo,
           almacen : req.body.almacen,
           incidencia : req.body.incidencia,
+          ubicacion : req.body.ubicacion,
+          pcompra : req.body.ubicacion,
+          iva : req.body.iva,
+          pvp : req.body.pvp,
           //image : req.body.image,
          
         })
-        console.log(NewMaterial,'almacen')
         const newMaterialDB = await NewMaterial.save();
         return res.json({
             status: 201,
