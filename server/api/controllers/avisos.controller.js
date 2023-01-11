@@ -109,20 +109,17 @@ const AddIntervencion = async (req, res, next) => {
   try {
     const { id } = req.params;
     const {
-      intervencion,
-      km,
+      estado,
       fecha_fin,
       fecha_inicio,
-      estado,
-      viaje,
-      tecnicoIntervencion,
+      intervencion,
+      km,
       materialIntervencion,
+      viaje,
+      material,
       motivo,
-      item,
       totalHoras,
     } = req.body;
-    console.log(tecnicoIntervencion, "tecnicoIntervencion");
-    console.log(id, "id_aviso");
 
     const avisoUpdated = await Avisos.findByIdAndUpdate(id, { estado: estado });
     //añadimos los campos de intervención
@@ -147,27 +144,12 @@ const AddIntervencion = async (req, res, next) => {
       { $push: { viaje: viaje } },
       { new: true }
     );
-    await Avisos.updateOne(
-      { _id: id },
-      { $push: { tecnicoIntervencion: tecnicoIntervencion } },
-      { new: true }
-    );
     const estadoUpdated = await Avisos.findByIdAndUpdate(id, {
       motivo: motivo,
     });
     await Avisos.updateOne(
       { _id: id },
       { $push: { totalHoras: totalHoras } },
-      { new: true }
-    );
-    await Avisos.updateOne(
-      { _id: id },
-      { $pull: { user_assigned: tecnicoIntervencion } },
-      { new: true }
-    );
-    await User.updateOne(
-      { _id: tecnicoIntervencion },
-      { $pull: { assigned_avisos: id } },
       { new: true }
     );
     const materialUpdated = await Material.findByIdAndUpdate(
@@ -179,33 +161,6 @@ const AddIntervencion = async (req, res, next) => {
       { $push: { materialIntervencion: materialIntervencion } },
       { new: true }
     );
-    await Avisos.updateOne(
-      { _id: id },
-      { $push: { item: item } },
-      { new: true }
-    );
-
-    // const deleteAvisoUSer = await User.findByIdAndUpdate(
-    //   tecnicoIntervencion,
-    //     { $pull: { assigned_avisos: id }},
-    //     { new: true }
-    // );
-    // console.log(deleteAvisoUSer,13);
-
-    // const deleteUSerAviso = await Avisos.findByIdAndUpdate(
-    //   id,
-    //     { $pull: { user_assigned: tecnicoIntervencion }},
-    //     { new: true }
-    // );
-    // console.log(deleteUSerAviso,14)
-
-    //elimino user_assigned al dejar aviso pendiente//no funciona. Revisar
-    //  const usserAsigned =await Avisos.updateOne(
-    //   { _id: id },
-    //   { $pull: { user_assigned:{name: tecnicoIntervencion}}},
-    //   { new: true }
-    //   );
-    //   console.log(usserAsigned,'user');
   } catch (error) {}
 };
 
