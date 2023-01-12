@@ -9,7 +9,7 @@ const getAvisos = async (req, res, next) => {
   try {
     const avisos = await Avisos.find()
       // .populate({ path: "tecnicoIntervencion",select: "name"})
-      // .populate({ path: "materialIntervencion",select: "descripcion"})
+      .populate({ path: "materialIntervencion",select: "descripcion"})
       // .populate({ path: "user_assigned", select: "name" });
     //  .populate(({path:'material_consumido', select :'descripcion'}));
     //console.log(avisos);
@@ -106,6 +106,8 @@ const getAvisoById = async (req, res, next) => {
 };
 
 const AddIntervencion = async (req, res, next) => {
+
+  console.log(req.body.materialIntervencion,89745)
   try {
     const { id } = req.params;
     const {
@@ -116,8 +118,9 @@ const AddIntervencion = async (req, res, next) => {
       km,
       materialIntervencion,
       viaje,
-      material,
+      //material,
       motivo,
+      importeReparacion,
       totalHoras,
     } = req.body;
 
@@ -161,6 +164,9 @@ const AddIntervencion = async (req, res, next) => {
       { $push: { materialIntervencion: materialIntervencion } },
       { new: true }
     );
+    const precioUpdated = await Avisos.findByIdAndUpdate(id, {
+      importeReparacion: importeReparacion,
+    });
   } catch (error) {}
 };
 
@@ -168,13 +174,11 @@ const ShowIntervencion = async (req, res, next) => {
   try {
     const { id } = req.params;
     const avisoById = await Avisos.findById(id)
-      .populate({ path: "tecnicoIntervencion", select: "name" })
-      .populate({ path: "materialIntervencion", select: "descripcion" })
+      .populate({ path: "materialIntervencion", select: "descripcion" });
 
     //.populate(({path:'materialIntervencion', select :'descripcion'}));
 
     //.populate({path:'materialIntervencion', select :'estado'})
-    console.log(avisoById.materialIntervencion, "materialIntervencion");
     return res.status(200).json(avisoById);
     // return res.json({
     //     status: 200,
