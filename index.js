@@ -12,6 +12,7 @@ import { DB_URL, connect } from "./server/config/db.js";
  import { userRoutes } from "./server/api/routes/user.routes.js";
  import { avisosRoutes } from './server/api/routes/avisos.routes.js';
  import { materialRoutes } from './server/api/routes/material.routes.js';
+ import { clientesRoutes } from './server/api/routes/clientes.routes.js';
 
 //creo servidor express
 const server = express();
@@ -34,6 +35,7 @@ server.use(cors('*'));
 server.use("/avisos", avisosRoutes);
 server.use("/users", userRoutes);
 server.use("/material", materialRoutes);
+server.use("/clientes", clientesRoutes);
 
 
 

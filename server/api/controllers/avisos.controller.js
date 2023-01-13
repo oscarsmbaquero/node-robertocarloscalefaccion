@@ -2,6 +2,7 @@ import { Avisos } from "../models/Avisos.Model.js";
 import { httpStatusCode } from "../../utils/httpStatusCode.js";
 import { Material } from "../models/Material.Model.js";
 import { User } from "../models/User.Model.js";
+import { Clientes } from "../models/Clientes.Model.js";
 
 
 const getAvisos = async (req, res, next) => {
@@ -28,7 +29,7 @@ const getAvisos = async (req, res, next) => {
 
 const createAvisos = async (req, res, next) => {
 
-  console.log(req.body)
+  //console.log(req.body)
   try {
     const NewAviso = new Avisos({
       cliente: req.body.cliente,
@@ -41,7 +42,6 @@ const createAvisos = async (req, res, next) => {
       estado: req.body.estado,
       //image: req.body.image,
     });
-
     const newAvisoDB = await NewAviso.save();
     return res.json({
       status: 201,
