@@ -86,16 +86,13 @@ const deleteMaterial = async (req, res, next) => {
 };
 
 const traspasoMaterial = ('/', async (req, res, next) => {  
-  
-  const { userSelected, materialId } = req.body;
-  console.log(userSelected,'userSelected');
-  console.log(materialId,'materialId');
-  try {
+  try { 
+    const { id } = req.params;
     const estadoModify = await Material.findByIdAndUpdate(
-      materialId,
-      {almacen:userSelected}
+      id,
+       {estado:'Operativo'},
+       {ubicacion:'Vehiculo'}
     );
-    console.log(estadoModify,'estadoMOdify');
     return res.status(200).json(estadoModify);
 } catch (error) {
     return next(error);

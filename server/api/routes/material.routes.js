@@ -12,7 +12,7 @@ import { getMaterial, addMaterial, getMaterialByTecnico, deleteMaterial, traspas
  materialRoutes.get("/:id", getMaterialByTecnico);
  materialRoutes.post('/', addMaterial);
  materialRoutes.delete("/:materialId", deleteMaterial);
- materialRoutes.put('/ubicar', traspasoMaterial);
+ materialRoutes.put('/ubicar/:id', traspasoMaterial);
  materialRoutes.put('/envioAlmacen', envioAlmacen);
  //userRoutes.put('/edit', [isAuth, upload.single('image'), uploadToCloudinary], editUser);
  
