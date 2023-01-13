@@ -16,6 +16,7 @@ const avisosSchema = new Schema(
     motivo: { type: String, required: false },
     totalHoras: [{ type: Number, required: false }],
     intervencion: [{ type: String, required:true}],
+    cobrado:[{ tipe: String, requied:false}],
     fecha_inicio: [{ type: String, required:true}],
     fecha_fin: [{type: String, required:true}],
     km: [{type: Number, required:true}],

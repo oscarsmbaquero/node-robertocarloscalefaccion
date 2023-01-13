@@ -87,19 +87,17 @@ const editAviso = async (req, res, next) => {
   }
 };
 
-const getAvisoById = async (req, res, next) => {
+const collectRepair = async (req, res, next) => {
   try {
-    console.log("Entro");
+    
     const { id } = req.params;
-    console.log(id);
-    const avisoById = await Avisos.findById(id);
-    return res.status(200).json(avisoById);
-    // return res.json({
-    //     status: 200,
-    //     message: httpStatusCode[200],
-    //     data: { jobs: jobbyid },
-    // });
-    //res.send(jobbyid);
+    console.log(id,56565656);
+    const facturaCobrada = await Avisos.findByIdAndUpdate(
+      id,
+      console.log(facturaCobrada,15)
+      // { cobrado: "Cobrado" }
+    );
+    
   } catch (error) {
     return next(error);
   }
@@ -196,7 +194,7 @@ export {
   createAvisos,
   deleteAviso,
   editAviso,
-  getAvisoById,
+  collectRepair,
   AddIntervencion,
   ShowIntervencion,
 };
