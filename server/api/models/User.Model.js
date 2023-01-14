@@ -7,9 +7,8 @@ const userSchema = new Schema(
     password: { type: String, required: true },
     name: { type: String, required: false },
     surname: { type: String, required: false },
-    account_type: { type: String, required: true },
     image: { type: String },
-    assigned_avisos: { type: mongoose.Types.ObjectId, ref: 'Avisos' },
+    
   },
   {
     timestamps: true,

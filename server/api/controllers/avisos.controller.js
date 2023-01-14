@@ -72,7 +72,7 @@ const deleteAviso = async (req, res, next) => {
 const editAviso = async (req, res, next) => {
   try {
     const { id } = req.params;
-    console.log(req.body, 87);
+    
     const avisoModify = new Avisos(req.body);
     //Para evitar que se modifique el id de mongo:
     avisoModify._id = id;
@@ -91,6 +91,7 @@ const collectRepair = async (req, res, next) => {
   try {
     
     const { id } = req.params;
+    console.log(id,45)
     const facturaCobrada = await Avisos.findByIdAndUpdate(
       id,
       { cobrado: "Cobrado" }

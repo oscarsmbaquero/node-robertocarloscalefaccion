@@ -82,7 +82,6 @@ const  registerUser = async(req, res, next) =>{
       surname: body.surname,
       email: body.email,
       password: pwdHash,
-      account_type: body.account_type,
     });
     const savedUser = await newUser.save();
 

@@ -87,6 +87,7 @@ const deleteMaterial = async (req, res, next) => {
 const traspasoMaterial = ('/', async (req, res, next) => {  
   try { 
     const { id, almacen } = req.body;
+    console.log(id, almacen)
     const estadoModify = await Material.findByIdAndUpdate(
       id,
        {ubicacion:almacen}
