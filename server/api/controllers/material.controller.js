@@ -9,7 +9,6 @@ const getMaterial = async (req,res,next) => {
     try {
         const material = await Material.find()
         //.populate(({path:'almacen', select :'name'}));
-        console.log(material,'material');
         return res.status(200).json(material);
     } catch (error) {
         return next(error)        
@@ -86,11 +85,11 @@ const deleteMaterial = async (req, res, next) => {
 };
 
 const traspasoMaterial = ('/', async (req, res, next) => {  
+  console.log('Entro');
   try { 
     const { id } = req.params;
     const estadoModify = await Material.findByIdAndUpdate(
       id,
-       {estado:'Operativo'},
        {ubicacion:'Vehiculo'}
     );
     return res.status(200).json(estadoModify);

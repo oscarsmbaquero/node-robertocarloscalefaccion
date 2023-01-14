@@ -29,7 +29,7 @@ const getAvisos = async (req, res, next) => {
 
 const createAvisos = async (req, res, next) => {
 
-  //console.log(req.body)
+  console.log(req.body.cobrado)
   try {
     const NewAviso = new Avisos({
       cliente: req.body.cliente,
@@ -40,7 +40,7 @@ const createAvisos = async (req, res, next) => {
       averia: req.body.averia,
       prioridad: req.body.prioridad,
       estado: req.body.estado,
-      //image: req.body.image,
+      cobrado: req.body.cobrado,
     });
     const newAvisoDB = await NewAviso.save();
     return res.json({
@@ -91,11 +91,9 @@ const collectRepair = async (req, res, next) => {
   try {
     
     const { id } = req.params;
-    console.log(id,56565656);
     const facturaCobrada = await Avisos.findByIdAndUpdate(
       id,
-      console.log(facturaCobrada,15)
-      // { cobrado: "Cobrado" }
+      { cobrado: "Cobrado" }
     );
     
   } catch (error) {
@@ -105,7 +103,6 @@ const collectRepair = async (req, res, next) => {
 
 const AddIntervencion = async (req, res, next) => {
 
-  console.log(req.body.materialIntervencion,89745)
   try {
     const { id } = req.params;
     const {
@@ -121,7 +118,7 @@ const AddIntervencion = async (req, res, next) => {
       importeReparacion,
       totalHoras,
     } = req.body;
-
+    console.log(importeReparacion,'importeReparacion')
     const avisoUpdated = await Avisos.findByIdAndUpdate(id, { estado: estado });
     //añadimos los campos de intervención
     await Avisos.updateOne({ _id: id }, { $push: { km: km } }, { new: true });

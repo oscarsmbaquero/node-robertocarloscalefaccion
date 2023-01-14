@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 
 const avisosSchema = new Schema(
 
-  //forzar commit 
   {
     cliente: { type: String, required: true },
     localidad: { type: String, required: true },
@@ -16,7 +15,7 @@ const avisosSchema = new Schema(
     motivo: { type: String, required: false },
     totalHoras: [{ type: Number, required: false }],
     intervencion: [{ type: String, required:true}],
-    cobrado:[{ tipe: String, requied:false}],
+    cobrado: { type: String, required: false },
     fecha_inicio: [{ type: String, required:true}],
     fecha_fin: [{type: String, required:true}],
     km: [{type: Number, required:true}],
