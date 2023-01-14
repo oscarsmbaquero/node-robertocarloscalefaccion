@@ -27,6 +27,30 @@ const getAvisos = async (req, res, next) => {
   }
 };
 
+const avisosDetail = async (req, res, next) => {
+  // console.log('Entro');
+  try {
+    const { id } = req.params;
+    const avisos = await Avisos.findById(id)
+      // .populate({ path: "tecnicoIntervencion",select: "name"})
+      .populate({ path: "materialIntervencion",select: "descripcion"})
+      // .populate({ path: "user_assigned", select: "name" });
+    //  .populate(({path:'material_consumido', select :'descripcion'}));
+    //console.log(avisos);
+    return res.status(200).json(avisos);
+    //console.log(avisos);
+    return res.json({
+      //  status : 200,
+      //  message : httpStatusCode[200],
+      data: { avisos: avisos },
+    });
+    res.send(avisos);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+
 const createAvisos = async (req, res, next) => {
 
   console.log(req.body.cobrado)
@@ -189,6 +213,7 @@ const ShowIntervencion = async (req, res, next) => {
 
 export {
   getAvisos,
+  avisosDetail,
   createAvisos,
   deleteAviso,
   editAviso,
