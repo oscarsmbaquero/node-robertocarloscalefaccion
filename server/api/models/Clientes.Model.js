@@ -10,6 +10,7 @@ const clientesSchema = new Schema(
     direccion: { type: String, required: true },
     caldera: { type: String, required: true },
     telefono: {type: String, required: true },
+    dni: {type: String, required: false },
   },
   {
     timestamps: true,

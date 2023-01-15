@@ -53,7 +53,6 @@ const avisosDetail = async (req, res, next) => {
 
 const createAvisos = async (req, res, next) => {
 
-  console.log(req.body.cobrado)
   try {
     const NewAviso = new Avisos({
       cliente: req.body.cliente,

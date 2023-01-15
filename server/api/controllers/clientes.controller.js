@@ -6,7 +6,7 @@ const addClient = async (req, res, next) => {
 
   try {    
      const query = { cliente: req.body.cliente };
-      console.log(query,123)
+      //console.log(query,123)
       const options = {     
       projection: { cliente: 1, telefono: 1},
     };
