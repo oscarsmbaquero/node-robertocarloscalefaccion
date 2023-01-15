@@ -6,21 +6,16 @@ import { Clientes } from "../models/Clientes.Model.js";
 
 
 const getAvisos = async (req, res, next) => {
-  // console.log('Entro');
+ 
   try {
     const avisos = await Avisos.find()
-      // .populate({ path: "tecnicoIntervencion",select: "name"})
       .populate({ path: "materialIntervencion",select: "descripcion"})
-      // .populate({ path: "user_assigned", select: "name" });
-    //  .populate(({path:'material_consumido', select :'descripcion'}));
-    //console.log(avisos);
     return res.status(200).json(avisos);
-    //console.log(avisos);
-    return res.json({
-      //  status : 200,
-      //  message : httpStatusCode[200],
-      data: { avisos: avisos },
-    });
+    // return res.json({
+    //   //  status : 200,
+    //   //  message : httpStatusCode[200],
+    //   data: { avisos: avisos },
+    // });
     res.send(avisos);
   } catch (error) {
     return next(error);
@@ -28,17 +23,12 @@ const getAvisos = async (req, res, next) => {
 };
 
 const avisosDetail = async (req, res, next) => {
-  // console.log('Entro');
   try {
     const { id } = req.params;
     const avisos = await Avisos.findById(id)
-      // .populate({ path: "tecnicoIntervencion",select: "name"})
       .populate({ path: "materialIntervencion",select: "descripcion"})
-      // .populate({ path: "user_assigned", select: "name" });
-    //  .populate(({path:'material_consumido', select :'descripcion'}));
-    //console.log(avisos);
     return res.status(200).json(avisos);
-    //console.log(avisos);
+ 
     return res.json({
       //  status : 200,
       //  message : httpStatusCode[200],
@@ -79,7 +69,7 @@ const createAvisos = async (req, res, next) => {
 const deleteAviso = async (req, res, next) => {
   try {
     const { avisoId } = req.params;
-    console.log(avisoId);
+   
     const avisoDelete = await Avisos.findByIdAndDelete(avisoId);
 
     return res.json({
@@ -114,7 +104,7 @@ const collectRepair = async (req, res, next) => {
   try {
     
     const { id } = req.params;
-    console.log(id,45)
+   
     const facturaCobrada = await Avisos.findByIdAndUpdate(
       id,
       { cobrado: "Cobrado" }
@@ -141,8 +131,8 @@ const AddIntervencion = async (req, res, next) => {
       motivo,
       importeReparacion,
       totalHoras,
+      dni,
     } = req.body;
-    console.log(importeReparacion,'importeReparacion')
     const avisoUpdated = await Avisos.findByIdAndUpdate(id, { estado: estado });
     //añadimos los campos de intervención
     await Avisos.updateOne({ _id: id }, { $push: { km: km } }, { new: true });
@@ -186,25 +176,18 @@ const AddIntervencion = async (req, res, next) => {
     const precioUpdated = await Avisos.findByIdAndUpdate(id, {
       importeReparacion: importeReparacion,
     });
+    const dniUpdated = await Clientes.findByIdAndUpdate(id, {
+      motivo: motivo,
+    });
   } catch (error) {}
 };
-
 const ShowIntervencion = async (req, res, next) => {
   try {
     const { id } = req.params;
     const avisoById = await Avisos.findById(id)
       .populate({ path: "materialIntervencion", select: "descripcion" });
-
-    //.populate(({path:'materialIntervencion', select :'descripcion'}));
-
-    //.populate({path:'materialIntervencion', select :'estado'})
     return res.status(200).json(avisoById);
-    // return res.json({
-    //     status: 200,
-    //     message: httpStatusCode[200],
-    //     data: { jobs: jobbyid },
-    // });
-    //res.send(jobbyid);
+  
   } catch (error) {
     return next(error);
   }

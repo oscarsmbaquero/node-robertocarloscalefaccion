@@ -42,36 +42,12 @@ const getMaterial = async (req,res,next) => {
     }
 };
 
-const getMaterialByTecnico = async (req, res, next) => {
-
-  try {
-      
-
-      const { id } = req.params;
-      console.log(id,'almacen')
-      //const { id: userId } = req.authority;populate(({path:'user_assigned', select :'name'}));
-      //console.log(id,'id');
-      const materialById = await Material.find({almacen : id})
-      console.log(materialById,'materialById')
-        //.populate(({path:'name_almacen', select :'name'}));
-      return res.status(200).json(materialById);
-      // return res.json({
-      //     status: 200,
-      //     message: httpStatusCode[200],
-      //     data: { jobs: jobbyid },
-      // });
-      //res.send(jobbyid);
-  } catch (error) {
-      return next(error)
-  }
-};
-
 const deleteMaterial = async (req, res, next) => {
   
     try {
-      const { materialId } = req.params;
-      
-      const materialDelete = await Material.findByIdAndDelete(materialId);
+      const { id } = req.params;
+     
+      const materialDelete = await Material.findByIdAndDelete(id);
 
       
       return res.json({
@@ -87,7 +63,6 @@ const deleteMaterial = async (req, res, next) => {
 const traspasoMaterial = ('/', async (req, res, next) => {  
   try { 
     const { id, almacen } = req.body;
-    console.log(id, almacen)
     const estadoModify = await Material.findByIdAndUpdate(
       id,
        {ubicacion:almacen}
@@ -97,17 +72,14 @@ const traspasoMaterial = ('/', async (req, res, next) => {
     return next(error);
 }
 })
-const envioAlmacen = ('/', async (req, res, next) => {  
+const repararMaterial = ('/', async (req, res, next) => {  
   
-  const { mat, tecnicoEnvio } = req.body;
-  console.log(mat._id,'mat');
-  console.log(tecnicoEnvio,'tecnicoEnvio');  
+  const { id, } = req.params;  
   try {
     const estadoModify = await Material.findByIdAndUpdate(
-      mat._id,
-      {almacen:'6367f71f69ac0f339a16d02f'}//id del almacen
+      id,
+      {estado:'Operativo'}//id del almacen
     );
-    console.log(estadoModify,'estadoMOdify');
     return res.status(200).json(estadoModify);
 } catch (error) {
     return next(error);
@@ -115,5 +87,5 @@ const envioAlmacen = ('/', async (req, res, next) => {
 })
 
 
-export { getMaterial, addMaterial, getMaterialByTecnico, deleteMaterial, traspasoMaterial, envioAlmacen };
+export { getMaterial, addMaterial, deleteMaterial, traspasoMaterial, repararMaterial };
 //getMaterialByUser, addMaterial
