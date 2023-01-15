@@ -12,7 +12,12 @@ const addClient = async (req, res, next) => {
     };
      const customer = await Clientes.findOne(query);
     if (customer){
-      console.log('Existe')
+      const error = {
+        status: 401,
+        message: 'The user exists'
+      };
+      return next(error);
+    
     }else{
       const NewCliente = new Clientes({
         cliente: req.body.cliente,
@@ -24,7 +29,7 @@ const addClient = async (req, res, next) => {
       const newClienteDB = await NewCliente.save();
       return res.json({
         status: 201,
-        message: httpStatusCode[201],
+        //message: httpStatusCode[201],
         data: { cliente: NewCliente },
       });
     }
