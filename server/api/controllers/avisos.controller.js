@@ -179,6 +179,7 @@ const AddIntervencion = async (req, res, next) => {
     const dniUpdated = await Clientes.findByIdAndUpdate(id, {
       motivo: motivo,
     });
+    return res.status(200).json();
   } catch (error) {}
 };
 const ShowIntervencion = async (req, res, next) => {
@@ -186,6 +187,7 @@ const ShowIntervencion = async (req, res, next) => {
     const { id } = req.params;
     const avisoById = await Avisos.findById(id)
       .populate({ path: "materialIntervencion", select: "descripcion" });
+      
     return res.status(200).json(avisoById);
   
   } catch (error) {
