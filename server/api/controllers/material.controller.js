@@ -85,7 +85,18 @@ const repararMaterial = ('/', async (req, res, next) => {
     return next(error);
 }
 })
+const getPrice = async (req,res,next) => {
+   
+  const { id } = req.params;
+  try {
+      const material = await Material.findById(id)
+      //.populate(({path:'almacen', select :'name'}));
+      return res.status(200).json(material);
+  } catch (error) {
+      return next(error)        
+  }
+};
 
 
-export { getMaterial, addMaterial, deleteMaterial, traspasoMaterial, repararMaterial };
+export { getMaterial, addMaterial, deleteMaterial, traspasoMaterial, repararMaterial, getPrice };
 //getMaterialByUser, addMaterial

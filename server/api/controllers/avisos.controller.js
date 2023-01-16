@@ -183,6 +183,7 @@ const AddIntervencion = async (req, res, next) => {
   } catch (error) {}
 };
 const ShowIntervencion = async (req, res, next) => {
+  console.log('Entro')
   try {
     const { id } = req.params;
     const avisoById = await Avisos.findById(id)
