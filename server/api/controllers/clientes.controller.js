@@ -20,11 +20,13 @@ const addClient = async (req, res, next) => {
     
     }else{
       const NewCliente = new Clientes({
-        cliente: req.body.cliente,
-        direccion: req.body.direccion,
-        localidad: req.body.localidad,
-        caldera: req.body.caldera,
+        cliente: req.body.nombre,
+        tipoCliente: req.body.tipoCliente,
+        dni: req.body.dni,
         telefono: req.body.telefono,
+        email: req.body.email,
+        direccion: req.body.direccion ,
+        localidad: req.body.localidad,
       });
       const newClienteDB = await NewCliente.save();
       return res.json({
@@ -35,17 +37,14 @@ const addClient = async (req, res, next) => {
     }
   } catch (error) {
     return next(error);
-  }
-
-  
-  
+  }  
 };
-
 
 const getClientes = async (req, res, next) => {
   // console.log('Entro');
   try {
     const clientes = await Clientes.find()
+    //.populate({ path: "avisosImpagados", select: "descripcion" });
      
     return res.status(200).json(clientes);
     res.send(clientes);
