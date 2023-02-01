@@ -51,6 +51,19 @@ const getClientes = async (req, res, next) => {
   } catch (error) {
     return next(error);
   }
+}
+  const getClienteById = async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const clientes = await Clientes.findById(id)
+      //.populate({ path: "avisosImpagados", select: "descripcion" });
+       
+      return res.status(200).json(clientes);
+      res.send(clientes);
+    } catch (error) {
+      return next(error);
+    }
 };
 
-export { getClientes,addClient };
+
+export { getClientes,addClient, getClienteById };
