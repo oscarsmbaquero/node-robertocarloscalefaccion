@@ -59,6 +59,14 @@ const createAvisos = async (req, res, next) => {
       cobrado: req.body.cobrado,
     });
     const newAvisoDB = await NewAviso.save();
+    //const idCliente = newAvisoDB._id;
+    // await Clientes.updateOne(
+    //   { _id: idCliente },
+    //   { $push: { avisos: idCliente } },
+    //   { new: true }
+    // );
+
+
     return res.json({
       status: 201,
       message: httpStatusCode[201],
