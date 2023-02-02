@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const avisosSchema = new Schema(
 
   {
-    cliente: { type: String, required: true },
+    //name:{ type: String, required:true},
+    //cliente: { type: String, required: true },
     localidad: { type: String, required: true },
     direccion: { type: String, required: true },
     caldera: { type: String, required: true },
@@ -21,6 +22,7 @@ const avisosSchema = new Schema(
     km: [{type: Number, required:true}],
     viaje: [{type: Number, required:true}],
     importeReparacion: {type: Number, required:false},
+    cliente: {type: mongoose.Types.ObjectId, ref:'Clientes', required:false},
     materialIntervencion: [{type: mongoose.Types.ObjectId, ref:'Material', required:false}],
   },
   {

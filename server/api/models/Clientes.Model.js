@@ -5,7 +5,7 @@ const clientesSchema = new Schema(
 
   //forzar commit 
   {
-    cliente: { type: String, required: true },
+    name: { type: String, required: true },
     tipoCliente: { type: String, required: true },
     dni: {type: String, required: true },
     telefono: {type: String, required: true },

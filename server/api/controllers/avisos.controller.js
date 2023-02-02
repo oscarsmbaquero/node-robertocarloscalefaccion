@@ -9,7 +9,9 @@ const getAvisos = async (req, res, next) => {
  
   try {
     const avisos = await Avisos.find()
+      .populate({path:'cliente', select :'cliente'})
       .populate({ path: "materialIntervencion",select: "descripcion"})
+      
     return res.status(200).json(avisos);
     // return res.json({
     //   //  status : 200,
@@ -27,6 +29,7 @@ const avisosDetail = async (req, res, next) => {
     const { id } = req.params;
     const avisos = await Avisos.findById(id)
       .populate({ path: "materialIntervencion",select: "descripcion"})
+      .populate({path:'cliente', select :'cliente'})
     return res.status(200).json(avisos);
  
     return res.json({
@@ -42,7 +45,7 @@ const avisosDetail = async (req, res, next) => {
 
 
 const createAvisos = async (req, res, next) => {
-
+  console.log(req.body.cliente)
   try {
     const NewAviso = new Avisos({
       cliente: req.body.cliente,
