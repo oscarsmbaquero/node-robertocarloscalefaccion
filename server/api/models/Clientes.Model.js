@@ -12,6 +12,7 @@ const clientesSchema = new Schema(
     email: {type: String, required: true },
     direccion: { type: String, required: true },
     localidad: { type: String, required: true },
+    avisos: [{type: mongoose.Types.ObjectId, ref:'Avisos', required:false}],
     //avisosImpagados:[{type: mongoose.Types.ObjectId, ref:'Avisos', required:false}]
   },
   {

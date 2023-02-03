@@ -59,12 +59,13 @@ const createAvisos = async (req, res, next) => {
       cobrado: req.body.cobrado,
     });
     const newAvisoDB = await NewAviso.save();
+    console.log(newAvisoDB,62)
     //const idCliente = newAvisoDB._id;
-    // await Clientes.updateOne(
-    //   { _id: idCliente },
-    //   { $push: { avisos: idCliente } },
-    //   { new: true }
-    // );
+    await Clientes.updateOne(
+      { _id: newAvisoDB.cliente },
+      { $push: { avisos: newAvisoDB._id } },
+      { new: true }
+    );
 
 
     return res.json({
