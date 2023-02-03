@@ -45,7 +45,6 @@ const getClientes = async (req, res, next) => {
   try {
     const clientes = await Clientes.find()
     .populate([{ path: "avisos", select: "cobrado" }]);
-     
     return res.status(200).json(clientes);
     res.send(clientes);
   } catch (error) {
@@ -53,11 +52,12 @@ const getClientes = async (req, res, next) => {
   }
 }
   const getClienteById = async (req, res, next) => {
+    console.log('Entro')
     try {
       const { id } = req.params;
       const clientes = await Clientes.findById(id)
-      //.populate({ path: "avisosImpagados", select: "descripcion" });
-       
+      .populate([{ path: "avisos", select: "" }]);
+       //console.log(clientes)
       return res.status(200).json(clientes);
       res.send(clientes);
     } catch (error) {

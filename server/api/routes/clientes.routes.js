@@ -9,7 +9,7 @@ import {  getClientes, addClient, getClienteById } from '../controllers/clientes
 
  clientesRoutes.post('/', addClient);
  clientesRoutes.get('/', getClientes);
- clientesRoutes.get('/:id', getClienteById);
+ clientesRoutes.get('/ById/:id', getClienteById);
   
   
 //  userRoutes.post('/login/',loginUser);
