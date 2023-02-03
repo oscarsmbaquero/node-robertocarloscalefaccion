@@ -6,13 +6,9 @@ const avisosSchema = new Schema(
   {
     //name:{ type: String, required:true},
     //cliente: { type: String, required: true },
-    localidad: { type: String, required: true },
-    direccion: { type: String, required: true },
-    caldera: { type: String, required: true },
     averia: { type: String, required: true },
     prioridad: { type: String, required: true },
     estado: { type: String, required: true },
-    telefono: {type: String, required: true },
     motivo: { type: String, required: false },
     totalHoras: [{ type: Number, required: false }],
     intervencion: [{ type: String, required:true}],

@@ -3,7 +3,8 @@ import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";
 import {isAuth} from '../../authentication/jwt.js';
 
-import {  getAvisos, avisosDetail, createAvisos, deleteAviso, editAviso, collectRepair, AddIntervencion, ShowIntervencion} from '../controllers/avisos.controller.js';
+import {  getAvisos, 
+          avisosDetail, createAvisos, deleteAviso, editAviso, collectRepair, AddIntervencion, ShowIntervencion, getClienteHistory} from '../controllers/avisos.controller.js';
 
  const avisosRoutes = express.Router();
 
@@ -15,6 +16,7 @@ import {  getAvisos, avisosDetail, createAvisos, deleteAviso, editAviso, collect
   avisosRoutes.put("/collectRepair/:id", collectRepair);
   avisosRoutes.post("/:id", AddIntervencion);
   avisosRoutes.get("/mostrar/intervencion/:id", ShowIntervencion);
+  avisosRoutes.get("/history/:id", getClienteHistory);
   
   
 //  userRoutes.post('/login/',loginUser);

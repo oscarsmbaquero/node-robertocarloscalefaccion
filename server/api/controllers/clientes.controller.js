@@ -4,27 +4,14 @@ import { Clientes } from "../models/Clientes.Model.js";
 const addClient = async (req, res, next) => {
  
 
-  try {    
-     const query = { cliente: req.body.cliente };
-      //console.log(query,123)
-      const options = {     
-      projection: { cliente: 1, telefono: 1},
-    };
-     const customer = await Clientes.findOne(query);
-    if (customer){
-      const error = {
-        status: 401,
-        message: 'The user exists'
-      };
-      return next(error);
-    
-    }else{
+  try {        
       const NewCliente = new Clientes({
-        cliente: req.body.nombre,
+        nombre: req.body.nombre,
         tipoCliente: req.body.tipoCliente,
         dni: req.body.dni,
         telefono: req.body.telefono,
         email: req.body.email,
+        caldera: req.body.caldera,
         direccion: req.body.direccion ,
         localidad: req.body.localidad,
       });
@@ -34,7 +21,7 @@ const addClient = async (req, res, next) => {
         //message: httpStatusCode[201],
         data: { cliente: NewCliente },
       });
-    }
+    
   } catch (error) {
     return next(error);
   }  
@@ -64,6 +51,8 @@ const getClientes = async (req, res, next) => {
       return next(error);
     }
 };
+
+
 
 
 export { getClientes,addClient, getClienteById };

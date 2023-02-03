@@ -9,9 +9,9 @@ const getAvisos = async (req, res, next) => {
  
   try {
     const avisos = await Avisos.find()
-      .populate({path:'cliente', select :'cliente'})
       .populate({ path: "materialIntervencion",select: "descripcion"})
-      
+      .populate({path:'cliente', select :""})
+     console.log(avisos.cliente,14) 
     return res.status(200).json(avisos);
     // return res.json({
     //   //  status : 200,
@@ -29,7 +29,7 @@ const avisosDetail = async (req, res, next) => {
     const { id } = req.params;
     const avisos = await Avisos.findById(id)
       .populate({ path: "materialIntervencion",select: "descripcion"})
-      .populate({path:'cliente', select :'cliente'})
+      .populate({path:'cliente', select :''})
     return res.status(200).json(avisos);
  
     return res.json({
@@ -48,15 +48,11 @@ const createAvisos = async (req, res, next) => {
   console.log(req.body.cliente)
   try {
     const NewAviso = new Avisos({
-      cliente: req.body.cliente,
-      direccion: req.body.direccion,
-      localidad: req.body.localidad,
-      caldera: req.body.caldera,
-      telefono: req.body.telefono,
       averia: req.body.averia,
       prioridad: req.body.prioridad,
       estado: req.body.estado,
       cobrado: req.body.cobrado,
+      cliente: req.body.cliente,
     });
     const newAvisoDB = await NewAviso.save();
     console.log(newAvisoDB,62)
@@ -208,6 +204,20 @@ const ShowIntervencion = async (req, res, next) => {
   }
 };
 
+const getClienteHistory = async (req, res, next) => {
+  //console.log('Entro')
+  try {
+    const { id } = req.params;
+    const clientes = await Avisos.find({cliente:id})
+    .populate([{ path: "materialIntervencion", select: "descripcion" }]);
+     //console.log(clientes)
+    return res.status(200).json(clientes);
+    res.send(clientes);
+  } catch (error) {
+    return next(error);
+  }
+};
+
 export {
   getAvisos,
   avisosDetail,
@@ -217,4 +227,5 @@ export {
   collectRepair,
   AddIntervencion,
   ShowIntervencion,
+  getClienteHistory
 };
