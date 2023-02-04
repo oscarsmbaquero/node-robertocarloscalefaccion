@@ -45,7 +45,6 @@ const avisosDetail = async (req, res, next) => {
 
 
 const createAvisos = async (req, res, next) => {
-  console.log(req.body.cliente)
   try {
     const NewAviso = new Avisos({
       averia: req.body.averia,
@@ -55,7 +54,6 @@ const createAvisos = async (req, res, next) => {
       cliente: req.body.cliente,
     });
     const newAvisoDB = await NewAviso.save();
-    console.log(newAvisoDB,62)
     //const idCliente = newAvisoDB._id;
     await Clientes.updateOne(
       { _id: newAvisoDB.cliente },
@@ -139,7 +137,7 @@ const AddIntervencion = async (req, res, next) => {
       motivo,
       importeReparacion,
       totalHoras,
-      dni,
+      clienteInte,
     } = req.body;
     const avisoUpdated = await Avisos.findByIdAndUpdate(id, { estado: estado });
     //añadimos los campos de intervención
@@ -184,9 +182,11 @@ const AddIntervencion = async (req, res, next) => {
     const precioUpdated = await Avisos.findByIdAndUpdate(id, {
       importeReparacion: importeReparacion,
     });
-    const dniUpdated = await Clientes.findByIdAndUpdate(id, {
-      motivo: motivo,
-    });
+    // await Clientes.updateOne(
+    //   { _id: clienteInte },
+    //   { $push: { avisos: id } },
+    //   { new: true }
+    // );
     return res.status(200).json();
   } catch (error) {}
 };
