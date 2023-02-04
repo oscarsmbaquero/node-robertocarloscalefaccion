@@ -60,6 +60,11 @@ const createAvisos = async (req, res, next) => {
       { $push: { avisos: newAvisoDB._id } },
       { new: true }
     );
+    await Clientes.updateOne(
+      { _id: newAvisoDB.cliente },
+      { $push: { averia: averia } },
+      { new: true }
+    );
 
 
     return res.json({
