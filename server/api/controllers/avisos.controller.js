@@ -3,7 +3,7 @@ import { httpStatusCode } from "../../utils/httpStatusCode.js";
 import { Material } from "../models/Material.Model.js";
 import { User } from "../models/User.Model.js";
 import { Clientes } from "../models/Clientes.Model.js";
-
+import { ObjectId } from 'mongodb';
 
 const getAvisos = async (req, res, next) => {
  
@@ -204,25 +204,22 @@ const AddIntervencion = async (req, res, next) => {
     const precioUpdated = await Avisos.findByIdAndUpdate(id, {
       importeReparacion: importeReparacion,
     });
-    // await Clientes.updateOne(
-    //   { _id: clienteInte },
-    //   { $push: { avisos: id } },
-    //   { new: true }
-    // );
-    //convierto el id string a objeto
-    
-    
-      await Avisos.updateOne(
-        { _id: selected.value },
-        { $push: { materialIntervencion: convertedSelected.value } },
-        { new: true }
-      )
-   
+//mapeo el array y genero otro array con el value=id en formato ObjectId
+const nuevoArray = selected.map(obj => ({
+  value: new ObjectId(obj.value),
+}));
+//mapeo el nuevo Array busco el aviso y lo añado a materialIntervencion 
+  nuevoArray.map(async (material) => {    
+  const materialUpdated = await Avisos.findByIdAndUpdate(
+    { _id: id },
+    { $push: { materialIntervencion: material.value } },
+    { new: true }
+  );
+});
     return res.status(200).json();
   } catch (error) {}
 };
-const ShowIntervencion = async (req, res, next) => {
-  
+const ShowIntervencion = async (req, res, next) => {  
   try {
     const { id } = req.params;
     const avisoById = await Avisos.findById(id)
